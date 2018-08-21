@@ -1,0 +1,8 @@
+public class PlayerTest {
+
+	@Test
+	public void repeatedPlayerID() {
+		Account(registerUsername);
+	}
+	
+}

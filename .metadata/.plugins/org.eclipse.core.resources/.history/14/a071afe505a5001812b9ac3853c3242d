@@ -1,9 +1,0 @@
-public class PlayerTest {
-
-	@Test
-	public void repeatedPlayerID() {
-		registerUsername("User1");
-		registerUsername("User1");
-	}
-	
-}

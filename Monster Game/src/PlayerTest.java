@@ -1,32 +1,40 @@
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PlayerTest {
-
-	@Before
+	Board board;
+	Player player;
+	
+	@BeforeEach
 	void setUp() {
-		initialisePlayer("1","1"); 
+		board = new Board();
+		player = new Player(0, 0);
+		board.initializePlayer(player);
 	}
 	
 	@Test
-	void testPlayerInsideGridHollow() {
-		main.playerGetNextPosition("S");
-		main.playerGetNextPosition("E");
-		assertEquals(main.boardUpdatePlayer);
+	void testMoveDirection() {
+		board.display();
+		assertEquals("nothing", board.movePlayer(player, "south"));
+		board.display();
+		assertEquals("nothing", board.movePlayer(player, "north"));
+		board.display();
+		assertEquals("nothing", board.movePlayer(player, "east"));
+		board.display();
+		assertEquals("nothing", board.movePlayer(player, "west"));
+		board.display();
 	}
 	
 	@Test
-	void testPlayerOutsideGrid() {
-		playerGetNextPosition = "W";
-		assertEquals(main.boardUpdatePlayer);
+	void testEmptyTile() {
+		board.movePlayer(player, "east");
+		assertEquals("false", board.movePlayer(player, "south"));
 	}
-	
+
 	@Test
-	void testPlayerDirectionNorth() {
-		PlayerGetNextPosition = "N";
-		assertEquals(Main.boardUpdatePlayer);
+	void testOutOfBounds() {
+		assertEquals("false", board.movePlayer(player, "north"));
 	}
-	
 }

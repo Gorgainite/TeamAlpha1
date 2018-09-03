@@ -1,22 +1,51 @@
 import static org.junit.Assert.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FoodTest {
+	Board board;
+	Player player;
+	Monster monsters[];
 	
-	@Before 
+	@BeforeEach
 	void setUp() {
-		initialiseFood(playerPosition));
-		initialisePlayer("1","8");
+		board = new Board();
+		player = new Player(0, 0);
+		monsters = new Monster[1];
+		monsters[0] = new Monster(5, 6);
+		board.initializePlayer(player);
+	}
+
+	@Test
+	void testFoodTime() {
+		int i = 0;
+		
+		board.placeFood(player);
+		board.movePlayer(player, "east");
+		board.updateFood(player, monsters);
+		board.display();
+		while (i < 4) {
+			board.updateFood(player, monsters);
+			i++;
+		}
+		board.display();
+		board.movePlayer(player, "west");
+		board.updateFood(player, monsters);
+		assertEquals(-1, player.getPoisoned());
 	}
 	
 	@Test
-	void testFoodDuration() {
-		assertEquals(Main.FoodDuration);
-	}
-	
-	@Test
-	void testFoodEffect() {
-		assertEquals(Main.PlayerSpeed);
+	void testPoisonedTime() {
+		int i = 0;
+		
+		board.placeFood(player);
+		board.updateFood(player, monsters);
+		board.updateFood(player, monsters);
+		while (i < 5) {
+			player.checkPoison();
+			i++;
+		}
+		assertEquals(-1, player.getPoisoned());
 	}
 }

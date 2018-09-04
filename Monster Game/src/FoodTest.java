@@ -42,6 +42,7 @@ class FoodTest {
 		board.placeFood(player);
 		board.updateFood(player, monsters);
 		board.updateFood(player, monsters);
+		assertEquals(0, player.getPoisoned());
 		while (i < 5) {
 			player.checkPoison();
 			i++;

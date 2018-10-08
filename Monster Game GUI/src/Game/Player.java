@@ -1,4 +1,5 @@
 package Game;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -11,10 +12,10 @@ public class Player extends Rectangle {
 
 	public boolean right, down, left, up;
 	private int speed = 4;
-	
+
 	public boolean poisoned = false;
 	public int poisonTimer = 0;
-	private int poisonTimerTarget =  60*20;
+	private int poisonTimerTarget = 60 * 20;
 
 	public Player(int x, int y) {
 		setBounds(x, y, 32, 32);
@@ -40,7 +41,7 @@ public class Player extends Rectangle {
 				}
 			}
 		}
-		
+
 		for (int i = 0; i < Main.level.monsters.size(); i++) {
 			Monster en = Main.level.monsters.get(i);
 			if (en.intersects(this)) {
@@ -49,12 +50,12 @@ public class Player extends Rectangle {
 				Main.frame.dispose();
 			}
 		}
-		
+
 		if (poisoned == true) {
 			speed = 2;
 			poisonTimer++;
 		}
-		
+
 		if (poisonTimer == poisonTimerTarget) {
 			poisoned = false;
 			speed = 4;

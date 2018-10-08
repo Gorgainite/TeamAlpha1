@@ -1,4 +1,5 @@
 package Game;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,11 +10,12 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 public class Main extends Canvas implements Runnable, KeyListener {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public static JFrame frame;
 
 	private boolean isRunning = false;
@@ -25,18 +27,18 @@ public class Main extends Canvas implements Runnable, KeyListener {
 
 	public static Player player;
 	public static Board level;
-	
+
 	private static int gameTimer;
-	public static int gameTimerTarget = 60*120;
+	public static int gameTimerTarget = 60 * 120;
 
 	public Main() {
 		Dimension dimension = new Dimension(WIDTH, HEIGHT);
 		setPreferredSize(dimension);
 		setMinimumSize(dimension);
 		setMaximumSize(dimension);
-		
+
 		gameTimer = 0;
-		
+
 		addKeyListener(this);
 
 		player = new Player(WIDTH / 2, HEIGHT / 2);
@@ -65,7 +67,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
 	private void tick() {
 		player.tick();
 		level.tick();
-		
+
 		gameTimer++;
 		if (gameTimer == gameTimerTarget) {
 			login.Main.loggedIn.setWins(login.Main.loggedIn.getWins() + 1);
@@ -164,7 +166,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
 		frame.add(game);
 		frame.setResizable(false);
 		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 

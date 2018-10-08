@@ -1,4 +1,5 @@
 package Game;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -51,12 +52,12 @@ public class Board {
 		for (Food food : food) {
 			food.tick();
 		}
-		
+
 		for (Monster monster : monsters) {
 			monster.tick();
 		}
 	}
-	
+
 	public void addFood() {
 		food.add(new Food(Main.player.x, Main.player.y));
 	}
@@ -72,7 +73,7 @@ public class Board {
 		for (Food food : food) {
 			food.render(g);
 		}
-		
+
 		for (Monster monster : monsters) {
 			monster.render(g);
 		}

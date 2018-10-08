@@ -3,7 +3,6 @@ package login;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
@@ -55,7 +54,7 @@ public class Accounts {
 				return true;
 			}
 		}
-		
+
 		JOptionPane.showMessageDialog(null, "Username not found.");
 		return false;
 	}
@@ -63,12 +62,12 @@ public class Accounts {
 	public void printLeaderboard(JFrame frame) {
 		int i = 0;
 		String[] data = new String[accounts.size()];
-		
+
 		for (Account temp : accounts) {
 			data[i] = temp.getUsername() + " " + temp.getWins() + " " + temp.getLosses();
 			i++;
 		}
-		
+
 		JList list = new JList(data);
 		list.setSelectionModel(new NoSelectionModel());
 		frame.getContentPane().add(list, "4, 6");

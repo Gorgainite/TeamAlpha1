@@ -1,4 +1,5 @@
 package login;
+
 public class Account {
 	private String username;
 	private String password;
@@ -37,7 +38,7 @@ public class Account {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public AccountType getType() {
 		return type;
 	}

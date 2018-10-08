@@ -6,15 +6,17 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class Level {
+public class Board {
 
 	public int width;
 	public int height;
 
 	public Tile[][] tiles;
 	public List<Monster> monsters;
+	public List<Food> food;
 
-	public Level(String path) {
+	public Board(String path) {
+		food = new ArrayList<>();
 		monsters = new ArrayList<>();
 
 		try {
@@ -45,9 +47,17 @@ public class Level {
 	}
 
 	public void tick() {
-		for (Monster enemy : monsters) {
-			enemy.tick();
+		for (Food food : food) {
+			food.tick();
 		}
+		
+		for (Monster monster : monsters) {
+			monster.tick();
+		}
+	}
+	
+	public void addFood() {
+		food.add(new Food(Main.player.x, Main.player.y));
 	}
 
 	public void render(Graphics g) {
@@ -58,8 +68,12 @@ public class Level {
 			}
 		}
 
-		for (Monster enemy : monsters) {
-			enemy.render(g);
+		for (Food food : food) {
+			food.render(g);
+		}
+		
+		for (Monster monster : monsters) {
+			monster.render(g);
 		}
 	}
 }

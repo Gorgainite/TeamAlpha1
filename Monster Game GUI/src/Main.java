@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Main extends Canvas implements Runnable, KeyListener {
 
@@ -20,18 +21,23 @@ public class Main extends Canvas implements Runnable, KeyListener {
 	private Thread thread;
 
 	public static Player player;
-	public static Level level;
+	public static Board level;
+	
+	private static int gameTimer;
+	private static int gameTimerTarget = 60*120;
 
 	public Main() {
 		Dimension dimension = new Dimension(WIDTH, HEIGHT);
 		setPreferredSize(dimension);
 		setMinimumSize(dimension);
 		setMaximumSize(dimension);
-
+		
+		gameTimer = 0;
+		
 		addKeyListener(this);
 
 		player = new Player(WIDTH / 2, HEIGHT / 2);
-		level = new Level("/map/map.png");
+		level = new Board("/map/map.png");
 	}
 
 	public synchronized void start() {
@@ -56,6 +62,12 @@ public class Main extends Canvas implements Runnable, KeyListener {
 	private void tick() {
 		player.tick();
 		level.tick();
+		
+		gameTimer++;
+		if (gameTimer == gameTimerTarget) {
+			JOptionPane.showMessageDialog(null, "You win!");
+			System.exit(0);
+		}
 	}
 
 	private void render() {
@@ -134,6 +146,8 @@ public class Main extends Canvas implements Runnable, KeyListener {
 			player.left = false;
 		if (e.getKeyCode() == KeyEvent.VK_UP)
 			player.up = false;
+		if (e.getKeyCode() == KeyEvent.VK_F)
+			level.addFood();
 	}
 
 	@Override

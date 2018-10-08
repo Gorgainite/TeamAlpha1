@@ -1,3 +1,4 @@
+package Game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -43,8 +44,9 @@ public class Player extends Rectangle {
 		for (int i = 0; i < Main.level.monsters.size(); i++) {
 			Monster en = Main.level.monsters.get(i);
 			if (en.intersects(this)) {
+				login.Main.loggedIn.setLosses(login.Main.loggedIn.getLosses() + 1);
 				JOptionPane.showMessageDialog(null, "You lose!");
-				System.exit(0);
+				Main.frame.dispose();
 			}
 		}
 		

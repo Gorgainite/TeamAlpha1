@@ -1,3 +1,4 @@
+package Game;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,6 +13,8 @@ import javax.swing.JOptionPane;
 public class Main extends Canvas implements Runnable, KeyListener {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static JFrame frame;
 
 	private boolean isRunning = false;
 
@@ -24,7 +27,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
 	public static Board level;
 	
 	private static int gameTimer;
-	private static int gameTimerTarget = 60*120;
+	public static int gameTimerTarget = 60*120;
 
 	public Main() {
 		Dimension dimension = new Dimension(WIDTH, HEIGHT);
@@ -65,8 +68,9 @@ public class Main extends Canvas implements Runnable, KeyListener {
 		
 		gameTimer++;
 		if (gameTimer == gameTimerTarget) {
+			login.Main.loggedIn.setWins(login.Main.loggedIn.getWins() + 1);
 			JOptionPane.showMessageDialog(null, "You win!");
-			System.exit(0);
+			frame.dispose();
 		}
 	}
 
@@ -156,11 +160,11 @@ public class Main extends Canvas implements Runnable, KeyListener {
 
 	public static void main(String[] args) {
 		Main game = new Main();
-		JFrame frame = new JFrame(TITLE);
+		frame = new JFrame(TITLE);
 		frame.add(game);
 		frame.setResizable(false);
 		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 

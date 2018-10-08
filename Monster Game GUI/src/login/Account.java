@@ -1,13 +1,15 @@
-
+package login;
 public class Account {
 	private String username;
 	private String password;
+	private AccountType type;
 	private int wins;
 	private int losses;
 
-	public Account(String username, String password) {
+	public Account(String username, String password, AccountType type) {
 		this.username = username;
 		this.password = password;
+		this.type = type;
 		this.wins = 0;
 		this.losses = 0;
 	}
@@ -34,5 +36,9 @@ public class Account {
 
 	public String getPassword() {
 		return password;
+	}
+	
+	public AccountType getType() {
+		return type;
 	}
 }

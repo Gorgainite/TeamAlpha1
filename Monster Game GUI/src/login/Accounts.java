@@ -70,6 +70,7 @@ public class Accounts {
 		}
 		
 		JList list = new JList(data);
+		list.setSelectionModel(new NoSelectionModel());
 		frame.getContentPane().add(list, "4, 6");
 	}
 }

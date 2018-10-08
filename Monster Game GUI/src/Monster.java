@@ -195,8 +195,6 @@ public class Monster extends Rectangle {
 			}
 		}
 
-		Rectangle bounds = new Rectangle(x, y, width, height);
-		
 		if (poisoned == true) {
 			speed = 1;
 			poisonTimer++;

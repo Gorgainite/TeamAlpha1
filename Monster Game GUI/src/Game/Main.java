@@ -176,7 +176,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
 			login.Main.loggedIn.setWins(login.Main.loggedIn.getWins() + 1);
 			JOptionPane.showMessageDialog(null, "You win!");
 		} else {
-			login.Main.loggedIn.setWins(login.Main.loggedIn.getLosses() + 1);
+			login.Main.loggedIn.setLosses(login.Main.loggedIn.getLosses() + 1);
 			JOptionPane.showMessageDialog(null, "You lose!");
 		}
 		

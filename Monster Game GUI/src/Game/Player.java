@@ -31,23 +31,21 @@ public class Player extends Rectangle {
 		if (up && canMove(x, y - speed))
 			y -= speed;
 
-		for (int i = 0; i < Main.level.food.size(); i++) {
-			Food en = Main.level.food.get(i);
+		for (int i = 0; i < Main.board.food.size(); i++) {
+			Food en = Main.board.food.get(i);
 			if (en.intersects(this)) {
 				if (en.placeTimer >= en.placeTimerTarget) {
-					Main.level.food.remove(i);
+					Main.board.food.remove(i);
 					poisoned = true;
 					poisonTimer = 0;
 				}
 			}
 		}
 
-		for (int i = 0; i < Main.level.monsters.size(); i++) {
-			Monster en = Main.level.monsters.get(i);
+		for (int i = 0; i < Main.board.monsters.size(); i++) {
+			Monster en = Main.board.monsters.get(i);
 			if (en.intersects(this)) {
-				login.Main.loggedIn.setLosses(login.Main.loggedIn.getLosses() + 1);
-				JOptionPane.showMessageDialog(null, "You lose!");
-				Main.frame.dispose();
+				Main.end(false);
 			}
 		}
 
@@ -65,7 +63,7 @@ public class Player extends Rectangle {
 
 	private boolean canMove(int nextX, int nextY) {
 		Rectangle bounds = new Rectangle(nextX, nextY, width, height);
-		Board level = Main.level;
+		Board level = Main.board;
 
 		for (int xx = 0; xx < level.tiles.length; xx++) {
 			for (int yy = 0; yy < level.tiles[0].length; yy++) {

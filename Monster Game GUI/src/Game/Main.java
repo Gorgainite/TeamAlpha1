@@ -18,15 +18,15 @@ public class Main extends Canvas implements Runnable, KeyListener {
 
 	public static JFrame frame;
 
-	private boolean isRunning = false;
+	private static boolean isRunning = false;
 
 	public static final int WIDTH = 640, HEIGHT = 480;
 	public static final String TITLE = "Monster Game";
 
-	private Thread thread;
+	private static Thread thread;
 
 	public static Player player;
-	public static Board level;
+	public static Board board;
 
 	private static int gameTimer;
 	public static int gameTimerTarget = 60 * 120;
@@ -42,7 +42,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
 		addKeyListener(this);
 
 		player = new Player(WIDTH / 2, HEIGHT / 2);
-		level = new Board("/map/map.png");
+		board = new Board("/map/map.png");
 	}
 
 	public synchronized void start() {
@@ -53,7 +53,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
 		thread.start();
 	}
 
-	public synchronized void stop() {
+	public synchronized static void stop() {
 		if (!isRunning)
 			return;
 		isRunning = false;
@@ -66,13 +66,11 @@ public class Main extends Canvas implements Runnable, KeyListener {
 
 	private void tick() {
 		player.tick();
-		level.tick();
+		board.tick();
 
 		gameTimer++;
 		if (gameTimer == gameTimerTarget) {
-			login.Main.loggedIn.setWins(login.Main.loggedIn.getWins() + 1);
-			JOptionPane.showMessageDialog(null, "You win!");
-			frame.dispose();
+			end(true);
 		}
 	}
 
@@ -89,7 +87,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
 		player.render(g);
-		level.render(g);
+		board.render(g);
 
 		g.dispose();
 		bs.show();
@@ -153,7 +151,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_UP)
 			player.up = false;
 		if (e.getKeyCode() == KeyEvent.VK_F)
-			level.addFood();
+			board.addFood();
 	}
 
 	@Override
@@ -171,5 +169,18 @@ public class Main extends Canvas implements Runnable, KeyListener {
 		frame.setVisible(true);
 
 		game.start();
+	}
+	
+	public static void end(Boolean win) {
+		if (win) {
+			login.Main.loggedIn.setWins(login.Main.loggedIn.getWins() + 1);
+			JOptionPane.showMessageDialog(null, "You win!");
+		} else {
+			login.Main.loggedIn.setWins(login.Main.loggedIn.getLosses() + 1);
+			JOptionPane.showMessageDialog(null, "You lose!");
+		}
+		
+		frame.dispose();
+		stop();
 	}
 }

@@ -186,11 +186,11 @@ public class Monster extends Rectangle {
 			}
 		}
 
-		for (int i = 0; i < Main.level.food.size(); i++) {
-			Food en = Main.level.food.get(i);
+		for (int i = 0; i < Main.board.food.size(); i++) {
+			Food en = Main.board.food.get(i);
 			if (en.intersects(this)) {
 				if (en.placeTimer >= en.placeTimerTarget) {
-					Main.level.food.remove(i);
+					Main.board.food.remove(i);
 					poisoned = true;
 					poisonTimer = 0;
 				}
@@ -211,7 +211,7 @@ public class Monster extends Rectangle {
 
 	private boolean canMove(int nextX, int nextY) {
 		Rectangle bounds = new Rectangle(nextX, nextY, width, height);
-		Board level = Main.level;
+		Board level = Main.board;
 
 		for (int xx = 0; xx < level.tiles.length; xx++) {
 			for (int yy = 0; yy < level.tiles[0].length; yy++) {

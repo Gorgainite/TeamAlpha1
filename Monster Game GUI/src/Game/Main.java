@@ -173,10 +173,10 @@ public class Main extends Canvas implements Runnable, KeyListener {
 	
 	public static void end(Boolean win) {
 		if (win) {
-			login.Main.loggedIn.setWins(login.Main.loggedIn.getWins() + 1);
+			Login.Main.loggedIn.setWins(Login.Main.loggedIn.getWins() + 1);
 			JOptionPane.showMessageDialog(null, "You win!");
 		} else {
-			login.Main.loggedIn.setLosses(login.Main.loggedIn.getLosses() + 1);
+			Login.Main.loggedIn.setLosses(Login.Main.loggedIn.getLosses() + 1);
 			JOptionPane.showMessageDialog(null, "You lose!");
 		}
 		
